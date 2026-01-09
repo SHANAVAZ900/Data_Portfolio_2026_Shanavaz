@@ -7,7 +7,7 @@ st.set_page_config(
     page_title="Mohammad S S V K Shanavaz | Database Developer",
     page_icon="🧊",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 # ------------- Assets Loading -------------
@@ -30,9 +30,14 @@ st.markdown("""
         color: #ecfdf5;
     }
     
-    /* Global Background Override (double check) */
+    /* Global Background Override */
     .stApp {
         background-color: #022c22;
+    }
+
+    /* Hide Sidebar completely if possible or just rely on collapsed state */
+    [data-testid="stSidebar"] {
+        display: none;
     }
 
     /* Buttons */
@@ -42,11 +47,11 @@ st.markdown("""
         border: none;
         border-radius: 5px;
         font-weight: 700;
-        padding: 0.5rem 1.5rem;
+        padding: 0.4rem 1.2rem; /* Reduced padding */
         transition: all 0.3s ease;
     }
     .stButton>button:hover {
-        background-color: #d97706; /* Darker Gold */
+        background-color: #d97706;
         color: white;
         border-color: #d97706;
     }
@@ -56,132 +61,92 @@ st.markdown("""
         color: #ffffff !important;
     }
     
-    .highlight {
-        color: #fbbf24;
-        font-weight: 700;
-    }
-    
     .section-title {
         text-align: center;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        font-size: 2.5rem;
+        margin-top: 1rem; /* Reduced top margin */
+        margin-bottom: 1.5rem; /* Reduced bottom margin */
+        font-size: 2.2rem;
         font-weight: 700;
     }
     
-    .subtitle {
-        color: #fbbf24;
-        font-size: 1.2rem;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-    }
-
-    /* Cards/Containers */
-    .css-1r6slb0, .css-12w0qpk { 
-        /* Streamlit generic container classes can be unstable, relying on markdown styling instead */
-    }
-    
+    /* Timeline Card (Collapsible) */
     .timeline-card {
         background-color: #064e3b;
-        padding: 1.5rem;
+        padding: 1rem; /* Reduced padding */
         border-radius: 10px;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem; /* Reduced margin */
         border-left: 5px solid #fbbf24;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s;
+    }
+    .timeline-card:hover {
+        background-color: #065f46;
+    }
+    
+    /* HTML Details/Summary Styling */
+    details > summary {
+        list-style: none; /* Hide default triangle */
+        cursor: pointer;
+        outline: none;
+    }
+    details > summary::-webkit-details-marker {
+        display: none;
     }
     
     .skill-container {
         background-color: #064e3b;
-        padding: 1.5rem;
+        padding: 1rem;
         border-radius: 10px;
         text-align: center;
         height: 100%;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s;
-    }
-    .skill-container:hover {
-        transform: translateY(-5px);
+        margin-bottom: 1rem; /* Added margin for stacking mobile */
     }
     
     .date-badge {
         background-color: rgba(251, 191, 36, 0.1);
         color: #fbbf24;
-        padding: 0.2rem 0.8rem;
-        border-radius: 15px;
-        font-size: 0.9rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 12px;
+        font-size: 0.85rem;
         font-weight: 500;
-        display: inline-block;
-        margin-bottom: 0.5rem;
-    }
-
-    /* Links */
-    a {
-        color: #fbbf24;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    a:hover {
-        color: #ffffff;
-        text-decoration: underline;
     }
     
-    hr {
-        border-color: #064e3b;
-        margin: 3rem 0;
+    /* Sidebar Navigation Links */
+    .nav-link {
+        display: block;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 5px;
+        color: #ecfdf5 !important;
+        background-color: rgba(255, 255, 255, 0.05);
+        text-decoration: none;
+        transition: background-color 0.2s;
+    }
+    .nav-link:hover {
+        background-color: rgba(251, 191, 36, 0.2);
+        color: #fbbf24 !important;
+    }
+
+    a {
+        text-decoration: none;
+        color: #fbbf24;
     }
 </style>
 """, unsafe_allow_html=True)
-
-# ------------- Sidebar -------------
-with st.sidebar:
-    if profile_img:
-        st.image(profile_img, width=180, use_container_width=False)
-    
-    st.markdown("""
-    ## Let's Connect
-    
-    <div style="margin-top: 1rem; font-size: 1.1rem;">
-        <p><i class="fas fa-envelope"></i> shanavaz900@gmail.com</p>
-        <p>
-            <a href="https://www.linkedin.com/in/mdssvkshanavaz/" target="_blank">
-                <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" width="20" style="vertical-align: middle; margin-right: 5px;"> LinkedIn Profile
-            </a>
-        </p>
-        <p>
-            <a href="https://github.com/SHANAVAZ900" target="_blank">
-                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20" style="vertical-align: middle; margin-right: 5px; background: white; border-radius: 50%;"> GitHub Profile
-            </a>
-        </p>
-        <p>📍 Hyderabad, India</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("---")
-    
-    # Navigation (using generic anchor links in markdown)
-    st.markdown("""
-    **Quick Links**
-    - [Home](#home)
-    - [About](#about)
-    - [Experience](#experience)
-    - [Skills](#skills)
-    - [Education](#education)
-    - [Contact](#contact-me)
-    """)
 
 # ------------- Hero Section -------------
 # Create a container for the Hero
 st.markdown('<div id="home"></div>', unsafe_allow_html=True)
 
-col1, col2 = st.columns([1.5, 1], gap="large")
+col1, col2 = st.columns([1.5, 1], gap="medium")
 
 with col1:
-    st.markdown('<div style="height: 20px;"></div>', unsafe_allow_html=True)
     st.markdown('<p class="subtitle">Database Developer</p>', unsafe_allow_html=True)
-    st.markdown('<h1>Hi, I\'m <span class="highlight">Mohammad S S V K Shanavaz</span></h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="font-size: 3rem; margin-bottom: 0.5rem;">Hi, I\'m <span class="highlight">Mohammad S S V K Shanavaz</span></h1>', unsafe_allow_html=True)
     st.markdown('### SQL | PostgreSQL | Power BI | Python | FinTech')
     st.markdown("""
-    <p style="font-size: 1.1rem; line-height: 1.6; color: #d1fae5;">
+    <p style="font-size: 1.1rem; line-height: 1.5; color: #d1fae5; margin-bottom: 1.5rem;">
     Passionate regarding delivering data-driven and high-impact solutions. Proven ability to optimize
     database performance, design scalable architectures, and collaborate with cross-functional teams.
     </p>
@@ -204,7 +169,7 @@ st.markdown("---")
 # ------------- About Section -------------
 st.markdown('<div id="about"></div>', unsafe_allow_html=True)
 
-col_about_img, col_about_text = st.columns([1, 2], gap="large")
+col_about_img, col_about_text = st.columns([1, 2], gap="medium")
 
 with col_about_img:
     if profile_img:
@@ -241,23 +206,63 @@ st.markdown('<h2 class="section-title">Professional <span class="highlight">Expe
 
 def render_experience(role, company, date, location, points):
     list_html = ""
+    is_clickable_hint = ""
+    
     if points:
-        list_str = ''.join([f'<li style="margin-bottom: 0.5rem;">{p}</li>' for p in points])
-        list_html = f'<ul style="margin-top: 1rem; margin-bottom: 0;">{list_str}</ul>'
+        list_str = ''.join([f'<li style="margin-bottom: 0.3rem;">{p}</li>' for p in points])
+        list_html = f'<div style="margin-top: 0.8rem; padding-left: 1rem; border-left: 1px solid #ffffff30;"><ul>{list_str}</ul></div>'
+        # Wrap in details for collapsible behavior
+        content = f"""
+        <details>
+            <summary>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <div style="flex-grow: 1;">
+                        <h3 style="margin: 0; font-size: 1.3rem; color: #fbbf24 !important;">{company}</h3>
+                        <h4 style="margin: 0.3rem 0; font-size: 1.1rem; color: white;">{role}</h4>
+                    </div>
+                    <div style="text-align: right; min-width: 120px;">
+                        <span class="date-badge">{date}</span>
+                        <div style="color: #9ca3af; font-size: 0.85rem; margin-top: 0.2rem;">{location}</div>
+                        <div style="color: #fbbf24; font-size: 0.8rem; margin-top: 0.3rem;">(Click to Expand) 👇</div>
+                    </div>
+                </div>
+            </summary>
+            {list_html}
+        </details>
+        """
+    else:
+        # Fallback/Generic view (should not ideally be reached for Exp/Edu if split, but keeping for safety)
+        content = f"""
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+            <div style="margin-bottom: 0.5rem;">
+                <h3 style="margin: 0; font-size: 1.3rem; color: #fbbf24 !important;">{company}</h3>
+                <h4 style="margin: 0.3rem 0; font-size: 1.1rem; color: white;">{role}</h4>
+            </div>
+            <div style="text-align: right; min-width: 120px;">
+                <span class="date-badge">{date}</span>
+                <div style="color: #9ca3af; font-size: 0.85rem; margin-top: 0.2rem;">{location}</div>
+            </div>
+        </div>
+        """
         
     st.markdown(f"""
     <div class="timeline-card">
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-            <div>
-                <h3 style="margin: 0; color: #fbbf24 !important;">{company}</h3>
-                <h4 style="margin: 0.5rem 0; color: white;">{role}</h4>
-            </div>
-            <div style="text-align: right;">
-                <span class="date-badge">{date}</span>
-                <div style="color: #9ca3af; font-size: 0.9rem;">{location}</div>
-            </div>
+        {content}
+    </div>
+    """, unsafe_allow_html=True)
+
+def render_education(institution, degree, date, location):
+    # Specialized card for Education to handle column width constraints better
+    st.markdown(f"""
+    <div class="timeline-card" style="height: 100%; display: flex; flex-direction: column;">
+        <div style="flex-grow: 1;">
+            <h3 style="margin: 0; font-size: 1.3rem; color: #fbbf24 !important;">{institution}</h3>
+            <h4 style="margin: 0.5rem 0; font-size: 1.1rem; color: white;">{degree}</h4>
         </div>
-        {list_html}
+        <div style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
+            <span class="date-badge">{date}</span>
+            <span style="color: #9ca3af; font-size: 0.9rem;">{location}</span>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -340,10 +345,10 @@ st.markdown('<h2 class="section-title">My <span class="highlight">Education</spa
 edu_col1, edu_col2 = st.columns(2)
 
 with edu_col1:
-    render_experience("Master of Science (MS) in IT", "IIIT Hyderabad", "June 2019 – July 2021", "Hyderabad", [])
+    render_education("IIIT Hyderabad", "Master of Science (MS) in IT", "June 2019 – July 2021", "Hyderabad")
 
 with edu_col2:
-    render_experience("B.Tech in ECE", "Amrita Vishwa Vidyapeetham", "June 2014 – Nov 2018", "Bengaluru", [])
+    render_education("Amrita Vishwa Vidyapeetham", "B.Tech in ECE", "June 2014 – Nov 2018", "Bengaluru")
 
 st.markdown("---")
 
