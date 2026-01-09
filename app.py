@@ -240,6 +240,11 @@ st.markdown('<div id="experience"></div>', unsafe_allow_html=True)
 st.markdown('<h2 class="section-title">Professional <span class="highlight">Experience</span></h2>', unsafe_allow_html=True)
 
 def render_experience(role, company, date, location, points):
+    list_html = ""
+    if points:
+        list_str = ''.join([f'<li style="margin-bottom: 0.5rem;">{p}</li>' for p in points])
+        list_html = f'<ul style="margin-top: 1rem; margin-bottom: 0;">{list_str}</ul>'
+        
     st.markdown(f"""
     <div class="timeline-card">
         <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
@@ -252,9 +257,7 @@ def render_experience(role, company, date, location, points):
                 <div style="color: #9ca3af; font-size: 0.9rem;">{location}</div>
             </div>
         </div>
-        <ul style="margin-top: 1rem; margin-bottom: 0;">
-            {''.join([f'<li style="margin-bottom: 0.5rem;">{p}</li>' for p in points])}
-        </ul>
+        {list_html}
     </div>
     """, unsafe_allow_html=True)
 
