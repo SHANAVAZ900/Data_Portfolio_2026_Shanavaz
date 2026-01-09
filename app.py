@@ -35,9 +35,9 @@ st.markdown("""
         background-color: #022c22;
     }
 
-    /* Hide Sidebar completely if possible or just rely on collapsed state */
-    [data-testid="stSidebar"] {
-        display: none;
+    /* Hide Sidebar elements completely */
+    [data-testid="stSidebar"], [data-testid="stSidebarNav"], [data-testid="collapsedControl"] {
+        display: none !important;
     }
 
     /* Buttons */
